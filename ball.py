@@ -8,8 +8,8 @@ class Ball:
         self.t.color('red')
         self.t.penup()
         self.t.goto(0, 0)
-        self.dx = 3
-        self.dy = 3
+        self.dx = 2
+        self.dy = 2
 
     def move(self):
         x, y = self.t.xcor() + self.dx, self.t.ycor() + self.dy
