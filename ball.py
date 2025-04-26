@@ -1,6 +1,5 @@
 import turtle
 
-
 class Ball:
     def __init__(self):
         self.t = turtle.Turtle()

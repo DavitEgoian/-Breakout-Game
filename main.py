@@ -18,11 +18,17 @@ class Game:
         self.screen.setup(width=WIDTH, height=HEIGHT)
         self.screen.tracer(0)
 
-        self.paddle = Paddle(self.screen, WIDTH, HEIGHT)
+        # Create game objects
+        self.paddle = Paddle(self.screen, WIDTH, HEIGHT, PADDLE_MOVE)
         self.ball = Ball()
         self.bricks = []
         self.scoreboard = Scoreboard(WIDTH, HEIGHT)
         self._create_bricks()
+
+        # Bind controls
+        self.screen.listen()
+        self.screen.onkey(self.paddle.move_left, 'Left')
+        self.screen.onkey(self.paddle.move_right, 'Right')
 
     def _create_bricks(self):
         start_x = -WIDTH/2 + 60
@@ -47,8 +53,13 @@ class Game:
 
             # Paddle collision
             if (self.ball.t.ycor() < -HEIGHT/2 + 60 and
-                abs(self.ball.t.xcor() - self.paddle.t.xcor()) < 60):
+                abs(self.ball.t.xcor() - self.paddle.t.xcor()) < (5 * 20)/2):
                 self.ball.bounce_y()
+
+            # Check win condition
+            if all(not brick.t.isvisible() for brick in self.bricks):
+                self.scoreboard.win()
+                break
 
             # Ball falls
             if self.ball.t.ycor() < -HEIGHT/2:

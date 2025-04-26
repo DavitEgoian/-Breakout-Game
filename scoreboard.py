@@ -1,14 +1,14 @@
 import turtle
 
 class Scoreboard:
-    def __init__(self, WIDTH, HEIGHT):
+    def __init__(self, width, height):
         self.score = 0
         self.pen = turtle.Turtle()
         self.pen.speed(0)
         self.pen.color('white')
         self.pen.penup()
         self.pen.hideturtle()
-        self.pen.goto(0, HEIGHT/2 - 40)
+        self.pen.goto(0, height/2 - 40)
         self.update()
 
     def update(self):
@@ -23,3 +23,8 @@ class Scoreboard:
         self.pen.clear()
         self.pen.goto(0, 0)
         self.pen.write("Game Over", align='center', font=('Courier', 36, 'normal'))
+
+    def win(self):
+        self.pen.clear()
+        self.pen.goto(0, 0)
+        self.pen.write("YOU WIN!", align='center', font=('Courier', 36, 'normal'))
